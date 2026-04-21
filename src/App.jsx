@@ -33,8 +33,8 @@ export default function App() {
           <BeforeAfter />
           <Pricing />
           <Reviews />
-          <Location />
           <Booking />
+          <Location />
           <Instagram />
         </main>
         <Footer />

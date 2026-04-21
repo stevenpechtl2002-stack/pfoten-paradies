@@ -50,7 +50,7 @@ export default function Location() {
               <div className="space-y-4 font-nunito text-sm">
                 {[
                   { icon:'📍', label:'Adresse', value:'Deutz-Mülheimer Str. 179, 51063 Köln' },
-                  { icon:'📞', label:'Telefon', value:'Bitte eintragen', href:null },
+                  { icon:'📞', label:'Telefon', value:'0160 99050581', href:'tel:016099050581' },
                   { icon:'✉️', label:'E-Mail', value:'Bitte eintragen', href:null },
                 ].map(({icon,label,value,href}) => (
                   <div key={label} className="flex items-start gap-3">

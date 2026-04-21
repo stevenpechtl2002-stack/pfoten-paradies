@@ -175,12 +175,12 @@ export default function Hero() {
               whileTap={{ scale: 0.97 }}>
               Termin buchen →
             </motion.a>
-            <motion.a href="tel:030123456"
+            <motion.a href="tel:016099050581"
               className="font-nunito font-700 text-sm px-7 py-4 rounded-2xl flex items-center gap-2"
               style={{ background: 'white', border: '1px solid #ece8f5', color: '#5a4a6a', boxShadow: '0 2px 12px rgba(0,0,0,0.06)' }}
               whileHover={{ scale: 1.05, boxShadow: '0 6px 20px rgba(0,0,0,0.1)' }}
               whileTap={{ scale: 0.97 }}>
-              <span>📞</span> 030 123456
+              <span>📞</span> 0160 99050581
             </motion.a>
           </motion.div>
 

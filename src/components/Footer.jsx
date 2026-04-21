@@ -20,11 +20,11 @@ export default function Footer() {
           animate={{ opacity:[0,0.12,0] }}
           transition={{ duration:4, delay:p.d, repeat:Infinity, repeatDelay:9 }}>
           <svg width="18" height="18" viewBox="0 0 100 100">
-            <ellipse cx="50" cy="72" rx="22" ry="18" fill="#FFB5D8"/>
-            <ellipse cx="25" cy="50" rx="10" ry="13" fill="#FFB5D8"/>
-            <ellipse cx="75" cy="50" rx="10" ry="13" fill="#FFB5D8"/>
-            <ellipse cx="35" cy="32" rx="9" ry="12" fill="#FFB5D8"/>
-            <ellipse cx="65" cy="32" rx="9" ry="12" fill="#FFB5D8"/>
+            <ellipse cx="18" cy="52" rx="10" ry="12" fill="#FFB5D8"/>
+            <ellipse cx="37" cy="36" rx="10" ry="12" fill="#FFB5D8"/>
+            <ellipse cx="63" cy="36" rx="10" ry="12" fill="#FFB5D8"/>
+            <ellipse cx="82" cy="52" rx="10" ry="12" fill="#FFB5D8"/>
+            <path d="M50,88 C36,88 26,79 26,68 C26,57 32,54 38,54 C42,54 46,56 50,59 C54,56 58,54 62,54 C68,54 74,57 74,68 C74,79 64,88 50,88 Z" fill="#FFB5D8"/>
           </svg>
         </motion.div>
       ))}
@@ -37,11 +37,11 @@ export default function Footer() {
           <motion.div variants={row} className="md:col-span-2">
             <div className="flex items-center gap-3 mb-5">
               <svg width="34" height="34" viewBox="0 0 100 100">
-                <ellipse cx="50" cy="72" rx="22" ry="18" fill="#FFB5D8"/>
-                <ellipse cx="25" cy="50" rx="10" ry="13" fill="#FFB5D8"/>
-                <ellipse cx="75" cy="50" rx="10" ry="13" fill="#FFB5D8"/>
-                <ellipse cx="35" cy="32" rx="9" ry="12" fill="#FFB5D8"/>
-                <ellipse cx="65" cy="32" rx="9" ry="12" fill="#FFB5D8"/>
+                <ellipse cx="18" cy="52" rx="10" ry="12" fill="#FFB5D8"/>
+                <ellipse cx="37" cy="36" rx="10" ry="12" fill="#FFB5D8"/>
+                <ellipse cx="63" cy="36" rx="10" ry="12" fill="#FFB5D8"/>
+                <ellipse cx="82" cy="52" rx="10" ry="12" fill="#FFB5D8"/>
+                <path d="M50,88 C36,88 26,79 26,68 C26,57 32,54 38,54 C42,54 46,56 50,59 C54,56 58,54 62,54 C68,54 74,57 74,68 C74,79 64,88 50,88 Z" fill="#FFB5D8"/>
               </svg>
               <h3 className="font-pacifico text-2xl" style={{ color:'#FFB5D8' }}>Hundesalon Fellraum</h3>
             </div>
@@ -64,7 +64,7 @@ export default function Footer() {
             <h4 className="font-nunito font-800 text-white text-xs tracking-[0.25em] uppercase mb-5">Kontakt</h4>
             <div className="space-y-3 font-nunito text-gray-500 text-sm">
               <p className="flex items-start gap-2"><span className="mt-0.5">📍</span><span>Deutz-Mülheimer Str. 179<br/>51063 Köln</span></p>
-              <p className="flex items-center gap-2"><span>📞</span><span className="text-gray-500">Bitte eintragen</span></p>
+              <p className="flex items-center gap-2"><span>📞</span><a href="tel:016099050581" className="hover:text-rosa transition-colors">0160 99050581</a></p>
               <p className="flex items-center gap-2"><span>✉️</span><span className="text-gray-500 text-xs">Bitte eintragen</span></p>
             </div>
           </motion.div>

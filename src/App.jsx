@@ -23,24 +23,22 @@ export default function App() {
         {!loaded && <LoadingScreen onComplete={() => setLoaded(true)} />}
       </AnimatePresence>
 
-      {loaded && (
-        <div className="font-nunito">
-          <Navbar />
-          <main>
-            <Hero />
-            <Features />
-            <Services />
-            <About />
-            <BeforeAfter />
-            <Pricing />
-            <Reviews />
-            <Location />
-            <Booking />
-            <Instagram />
-          </main>
-          <Footer />
-        </div>
-      )}
+      <div className="font-nunito">
+        <Navbar />
+        <main>
+          <Hero />
+          <Features />
+          <Services />
+          <About />
+          <BeforeAfter />
+          <Pricing />
+          <Reviews />
+          <Location />
+          <Booking />
+          <Instagram />
+        </main>
+        <Footer />
+      </div>
     </>
   )
 }

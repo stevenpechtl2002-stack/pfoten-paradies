@@ -16,7 +16,7 @@ export default function Hero() {
   const px = useSpring(rawX, { stiffness: 50, damping: 30 })
   const py = useSpring(rawY, { stiffness: 50, damping: 30 })
 
-  // ── Scroll → video time ──────────────────────────────────────
+  // ── Scroll-bound video: alles im RAF-Loop für minimalen Lag ──
   useEffect(() => {
     const video = videoRef.current
     if (!video) return
@@ -26,35 +26,14 @@ export default function Hero() {
       video.pause()
       video.currentTime = 0
       currentTime.current = 0
-      targetTime.current = 0
     }
 
     video.addEventListener('loadedmetadata', onLoaded)
     if (video.readyState >= 1) onLoaded()
-
     return () => video.removeEventListener('loadedmetadata', onLoaded)
   }, [])
 
-  useEffect(() => {
-    const video = videoRef.current
-    if (!video || !duration) return
-
-    const onScroll = () => {
-      const section = sectionRef.current
-      if (!section) return
-      // Scroll range: section top → section bottom - viewport
-      const rect = section.getBoundingClientRect()
-      const totalScroll = section.offsetHeight - window.innerHeight
-      const scrolled = -rect.top
-      const progress = Math.max(0, Math.min(1, scrolled / totalScroll))
-      targetTime.current = progress * duration
-    }
-
-    window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
-  }, [duration])
-
-  // 60fps lerp loop
+  // 60fps RAF — scroll position direkt im Loop lesen (kein Event-Lag)
   useEffect(() => {
     const video = videoRef.current
     if (!video) return
@@ -62,11 +41,23 @@ export default function Hero() {
     const lerp = (a, b, t) => a + (b - a) * t
 
     const tick = () => {
+      // Scroll-Position direkt im Frame berechnen — eine Frame weniger Verzögerung
+      const section = sectionRef.current
+      if (section && video.duration) {
+        const top = section.getBoundingClientRect().top
+        const total = section.offsetHeight - window.innerHeight
+        const progress = Math.max(0, Math.min(1, -top / total))
+        targetTime.current = progress * video.duration
+      }
+
       const diff = Math.abs(targetTime.current - currentTime.current)
-      if (diff > 0.016) {
-        currentTime.current = lerp(currentTime.current, targetTime.current, 0.12)
+      if (diff > 0.004) {
+        // Lerp 0.22 = schnell & smooth; bei großen Sprüngen direkt springen
+        const factor = diff > 1 ? 1 : 0.22
+        currentTime.current = lerp(currentTime.current, targetTime.current, factor)
         video.currentTime = currentTime.current
       }
+
       rafRef.current = requestAnimationFrame(tick)
     }
 

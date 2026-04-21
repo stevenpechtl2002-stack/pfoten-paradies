@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 
 const links = [
@@ -8,6 +8,57 @@ const links = [
   { label: 'Bewertungen', href: '#bewertungen' },
   { label: 'Kontakt', href: '#buchen' },
 ]
+
+// Animated roller coaster: cart rides a sine wave from left to right, loops
+function RollerCoaster() {
+  const cartRef = useRef(null)
+  const rafRef = useRef(null)
+  const tRef = useRef(0)
+  const W = 72, H = 28, AMP = 9, FREQ = 2
+
+  useEffect(() => {
+    const tick = () => {
+      tRef.current += 0.012
+      const t = tRef.current
+      const x = ((t % 1) * W)
+      const y = H / 2 - AMP * Math.sin(t * FREQ * 2 * Math.PI)
+      if (cartRef.current) {
+        cartRef.current.setAttribute('cx', x)
+        cartRef.current.setAttribute('cy', y)
+      }
+      rafRef.current = requestAnimationFrame(tick)
+    }
+    rafRef.current = requestAnimationFrame(tick)
+    return () => cancelAnimationFrame(rafRef.current)
+  }, [])
+
+  // Build the wave path: one full sine wave across the width
+  const pathPoints = Array.from({ length: 81 }, (_, i) => {
+    const x = (i / 80) * W
+    const y = H / 2 - AMP * Math.sin((i / 80) * FREQ * 2 * Math.PI)
+    return `${i === 0 ? 'M' : 'L'}${x.toFixed(2)},${y.toFixed(2)}`
+  }).join(' ')
+
+  return (
+    <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ overflow: 'visible' }}>
+      {/* Track */}
+      <path d={pathPoints} fill="none" stroke="#FFB5D8" strokeWidth="2.2" strokeLinecap="round" />
+      {/* Support lines (decorative) */}
+      {[12, 24, 36, 48, 60].map(x => {
+        const y = H / 2 - AMP * Math.sin((x / W) * FREQ * 2 * Math.PI)
+        return <line key={x} x1={x} y1={y + 2} x2={x} y2={H + 2} stroke="rgba(255,181,216,0.35)" strokeWidth="1.2" />
+      })}
+      {/* Cart */}
+      <circle ref={cartRef} cx="0" cy={H / 2} r="4.5" fill="url(#cartGrad)" />
+      <defs>
+        <radialGradient id="cartGrad" cx="40%" cy="35%">
+          <stop offset="0%" stopColor="#fff" />
+          <stop offset="100%" stopColor="#C5B5EA" />
+        </radialGradient>
+      </defs>
+    </svg>
+  )
+}
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
@@ -31,17 +82,9 @@ export default function Navbar() {
       transition={{ duration: 0.4 }}
     >
       {/* Logo */}
-      <a href="#" className="flex items-center gap-2 group">
-        <motion.div whileHover={{ rotate: 15, scale: 1.1 }} transition={{ type: 'spring', stiffness: 400 }}>
-          <svg width="32" height="32" viewBox="0 0 100 100">
-            <ellipse cx="50" cy="72" rx="22" ry="18" fill="#FFB5D8" />
-            <ellipse cx="25" cy="50" rx="10" ry="13" fill="#FFB5D8" />
-            <ellipse cx="75" cy="50" rx="10" ry="13" fill="#FFB5D8" />
-            <ellipse cx="35" cy="32" rx="9" ry="12" fill="#FFB5D8" />
-            <ellipse cx="65" cy="32" rx="9" ry="12" fill="#FFB5D8" />
-          </svg>
-        </motion.div>
-        <span className="font-pacifico text-xl" style={{ color: scrolled ? '#333' : 'white' }}>
+      <a href="#" className="flex items-center gap-3 group">
+        <RollerCoaster />
+        <span className="font-pacifico text-xl" style={{ color: scrolled ? '#333' : '#1a1025' }}>
           Hundesalon Fellraum
         </span>
       </a>
@@ -53,7 +96,7 @@ export default function Navbar() {
             key={l.href}
             href={l.href}
             className="font-nunito font-600 text-sm tracking-wide relative group"
-            style={{ color: scrolled ? '#555' : 'rgba(255,255,255,0.9)' }}
+            style={{ color: scrolled ? '#555' : '#333' }}
             whileHover={{ y: -1 }}
           >
             {l.label}
@@ -62,7 +105,7 @@ export default function Navbar() {
         ))}
         <motion.a
           href="#buchen"
-          className="font-nunito font-700 text-sm px-5 py-2.5 rounded-full text-white glow-btn pulse-glow"
+          className="font-nunito font-700 text-sm px-5 py-2.5 rounded-full text-white"
           style={{ background: 'linear-gradient(135deg, #FFB5D8, #C5B5EA)' }}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
@@ -81,7 +124,7 @@ export default function Navbar() {
           <motion.span
             key={i}
             className="block h-0.5 w-6 rounded-full"
-            style={{ background: scrolled ? '#333' : 'white' }}
+            style={{ background: scrolled ? '#333' : '#555' }}
             animate={{
               rotate: open && i === 0 ? 45 : open && i === 2 ? -45 : 0,
               y: open && i === 0 ? 8 : open && i === 2 ? -8 : 0,

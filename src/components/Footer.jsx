@@ -1,144 +1,104 @@
-import { useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
 
-const PAW_POSITIONS = [
-  { x: 5, y: 20, rot: -20, delay: 0 },
-  { x: 12, y: 60, rot: 15, delay: 0.3 },
-  { x: 20, y: 30, rot: -10, delay: 0.6 },
-  { x: 30, y: 70, rot: 25, delay: 0.9 },
-  { x: 40, y: 15, rot: -15, delay: 1.2 },
-  { x: 50, y: 55, rot: 10, delay: 1.5 },
-  { x: 60, y: 25, rot: -20, delay: 1.8 },
-  { x: 70, y: 75, rot: 18, delay: 2.1 },
-  { x: 80, y: 40, rot: -8, delay: 2.4 },
-  { x: 90, y: 80, rot: 22, delay: 2.7 },
-  { x: 95, y: 10, rot: -12, delay: 3.0 },
+const PAW_POS = [
+  {x:8,y:25,r:-20,d:0},{x:16,y:65,r:15,d:0.4},{x:25,y:35,r:-10,d:0.8},
+  {x:35,y:72,r:22,d:1.2},{x:47,y:18,r:-15,d:1.6},{x:55,y:58,r:10,d:2.0},
+  {x:65,y:28,r:-18,d:2.4},{x:75,y:75,r:20,d:2.8},{x:85,y:42,r:-8,d:3.2},
+  {x:93,y:82,r:25,d:3.6},
 ]
 
-function PawPrint({ x, y, rot, delay }) {
-  return (
-    <motion.div
-      className="absolute opacity-0"
-      style={{ left: `${x}%`, top: `${y}%`, rotate: rot }}
-      animate={{ opacity: [0, 0.3, 0.15, 0] }}
-      transition={{ duration: 3, delay, repeat: Infinity, repeatDelay: 8 }}
-    >
-      <svg width="20" height="20" viewBox="0 0 100 100">
-        <ellipse cx="50" cy="72" rx="22" ry="18" fill="#FFB5D8" />
-        <ellipse cx="25" cy="50" rx="10" ry="13" fill="#FFB5D8" />
-        <ellipse cx="75" cy="50" rx="10" ry="13" fill="#FFB5D8" />
-        <ellipse cx="35" cy="32" rx="9" ry="12" fill="#FFB5D8" />
-        <ellipse cx="65" cy="32" rx="9" ry="12" fill="#FFB5D8" />
-      </svg>
-    </motion.div>
-  )
-}
+const container = { hidden:{}, show:{ transition:{ staggerChildren:0.08 } } }
+const row = { hidden:{ opacity:0, y:30 }, show:{ opacity:1, y:0, transition:{ duration:0.6, ease:[0.22,1,0.36,1] } } }
 
 export default function Footer() {
   return (
-    <footer className="relative pt-20 pb-8 overflow-hidden" style={{ background: 'linear-gradient(135deg, #2d2d3a 0%, #1a1a25 100%)' }}>
-      {/* Animated paw prints */}
-      {PAW_POSITIONS.map((p, i) => (
-        <PawPrint key={i} {...p} />
+    <footer className="relative pt-20 pb-8 overflow-hidden" style={{ background:'linear-gradient(160deg,#1e1e2e,#12121a)' }}>
+
+      {PAW_POS.map((p,i) => (
+        <motion.div key={i} className="absolute pointer-events-none"
+          style={{ left:`${p.x}%`, top:`${p.y}%`, rotate:p.r }}
+          animate={{ opacity:[0,0.12,0] }}
+          transition={{ duration:4, delay:p.d, repeat:Infinity, repeatDelay:9 }}>
+          <svg width="18" height="18" viewBox="0 0 100 100">
+            <ellipse cx="50" cy="72" rx="22" ry="18" fill="#FFB5D8"/>
+            <ellipse cx="25" cy="50" rx="10" ry="13" fill="#FFB5D8"/>
+            <ellipse cx="75" cy="50" rx="10" ry="13" fill="#FFB5D8"/>
+            <ellipse cx="35" cy="32" rx="9" ry="12" fill="#FFB5D8"/>
+            <ellipse cx="65" cy="32" rx="9" ry="12" fill="#FFB5D8"/>
+          </svg>
+        </motion.div>
       ))}
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12">
+      <motion.div className="relative z-10 max-w-7xl mx-auto px-8 md:px-16"
+        variants={container} initial="hidden" whileInView="show" viewport={{ once:true }}>
+
         <div className="grid md:grid-cols-4 gap-12 mb-16">
-          {/* Brand */}
-          <div className="md:col-span-2">
-            <div className="flex items-center gap-3 mb-4">
-              <svg width="36" height="36" viewBox="0 0 100 100">
-                <ellipse cx="50" cy="72" rx="22" ry="18" fill="#FFB5D8" />
-                <ellipse cx="25" cy="50" rx="10" ry="13" fill="#FFB5D8" />
-                <ellipse cx="75" cy="50" rx="10" ry="13" fill="#FFB5D8" />
-                <ellipse cx="35" cy="32" rx="9" ry="12" fill="#FFB5D8" />
-                <ellipse cx="65" cy="32" rx="9" ry="12" fill="#FFB5D8" />
+
+          <motion.div variants={row} className="md:col-span-2">
+            <div className="flex items-center gap-3 mb-5">
+              <svg width="34" height="34" viewBox="0 0 100 100">
+                <ellipse cx="50" cy="72" rx="22" ry="18" fill="#FFB5D8"/>
+                <ellipse cx="25" cy="50" rx="10" ry="13" fill="#FFB5D8"/>
+                <ellipse cx="75" cy="50" rx="10" ry="13" fill="#FFB5D8"/>
+                <ellipse cx="35" cy="32" rx="9" ry="12" fill="#FFB5D8"/>
+                <ellipse cx="65" cy="32" rx="9" ry="12" fill="#FFB5D8"/>
               </svg>
-              <h3 className="font-pacifico text-2xl" style={{ color: '#FFB5D8' }}>Pfoten Paradies</h3>
+              <h3 className="font-pacifico text-2xl" style={{ color:'#FFB5D8' }}>Pfoten Paradies</h3>
             </div>
-            <p className="font-nunito text-gray-400 leading-relaxed mb-6">
-              Ihr Liebling in den besten Händen. Professionelle Hundepflege mit Liebe und Leidenschaft seit 2015.
+            <p className="font-nunito text-gray-500 leading-relaxed mb-6 max-w-xs">
+              Berlins Premium Hundesalon — professionelle Pflege mit Liebe und Leidenschaft seit 2015.
             </p>
             <div className="flex gap-3">
-              {['Instagram', 'Facebook', 'TikTok'].map((s) => (
-                <motion.a
-                  key={s}
-                  href="#"
-                  className="w-10 h-10 rounded-xl flex items-center justify-center text-sm font-nunito font-700"
-                  style={{ background: 'rgba(255,181,216,0.15)', color: '#FFB5D8' }}
-                  whileHover={{ background: 'rgba(255,181,216,0.3)', scale: 1.1 }}
-                >
-                  {s[0]}
+              {['IG','FB','TK'].map(s => (
+                <motion.a key={s} href="#"
+                  className="w-10 h-10 rounded-xl flex items-center justify-center font-nunito font-800 text-xs"
+                  style={{ background:'rgba(255,181,216,0.1)', color:'#FFB5D8' }}
+                  whileHover={{ background:'rgba(255,181,216,0.25)', scale:1.1 }}>
+                  {s}
                 </motion.a>
               ))}
             </div>
-          </div>
+          </motion.div>
 
-          {/* Contact */}
-          <div>
-            <h4 className="font-nunito font-800 text-white mb-4 text-sm tracking-widest uppercase">Kontakt</h4>
-            <div className="space-y-3 font-nunito text-gray-400 text-sm">
-              <p className="flex items-start gap-2">
-                <span className="mt-0.5">📍</span>
-                <span>Musterstraße 1<br />10115 Berlin</span>
-              </p>
-              <p className="flex items-center gap-2">
-                <span>📞</span>
-                <a href="tel:030123456" className="hover:text-rosa transition-colors">030 123456</a>
-              </p>
-              <p className="flex items-center gap-2">
-                <span>✉️</span>
-                <a href="mailto:info@pfoten-paradies.de" className="hover:text-rosa transition-colors">info@pfoten-paradies.de</a>
-              </p>
-              <p className="flex items-center gap-2">
-                <span>📸</span>
-                <a href="#" className="hover:text-rosa transition-colors">@pfoten.paradies</a>
-              </p>
+          <motion.div variants={row}>
+            <h4 className="font-nunito font-800 text-white text-xs tracking-[0.25em] uppercase mb-5">Kontakt</h4>
+            <div className="space-y-3 font-nunito text-gray-500 text-sm">
+              <p className="flex items-start gap-2"><span className="mt-0.5">📍</span><span>Musterstraße 1<br/>10115 Berlin</span></p>
+              <p className="flex items-center gap-2"><span>📞</span><a href="tel:030123456" className="hover:text-rosa transition-colors">030 123456</a></p>
+              <p className="flex items-center gap-2"><span>✉️</span><a href="mailto:info@pfoten-paradies.de" className="hover:text-rosa transition-colors text-xs">info@pfoten-paradies.de</a></p>
             </div>
-          </div>
+          </motion.div>
 
-          {/* Hours */}
-          <div>
-            <h4 className="font-nunito font-800 text-white mb-4 text-sm tracking-widest uppercase">Öffnungszeiten</h4>
-            <div className="space-y-2 font-nunito text-gray-400 text-sm">
-              {[
-                { day: 'Montag – Freitag', time: '09:00 – 18:00' },
-                { day: 'Samstag', time: '09:00 – 15:00' },
-                { day: 'Sonntag', time: 'Geschlossen' },
-              ].map(({ day, time }) => (
-                <div key={day} className="flex justify-between gap-4">
-                  <span>{day}</span>
-                  <span className={time === 'Geschlossen' ? 'text-gray-600' : 'text-white font-600'}>{time}</span>
+          <motion.div variants={row}>
+            <h4 className="font-nunito font-800 text-white text-xs tracking-[0.25em] uppercase mb-5">Öffnungszeiten</h4>
+            <div className="space-y-2.5 font-nunito text-sm">
+              {[{d:'Mo – Fr',t:'09:00 – 18:00',o:true},{d:'Samstag',t:'09:00 – 15:00',o:true},{d:'Sonntag',t:'Geschlossen',o:false}].map(({d,t,o})=>(
+                <div key={d} className="flex justify-between gap-4">
+                  <span className="text-gray-500">{d}</span>
+                  <span className={o?'text-white font-600':'text-gray-600'}>{t}</span>
                 </div>
               ))}
             </div>
-
-            <motion.a
-              href="#buchen"
+            <motion.a href="#buchen"
               className="inline-block mt-6 font-nunito font-700 text-sm px-5 py-2.5 rounded-xl text-white"
-              style={{ background: 'linear-gradient(135deg, #FFB5D8, #C5B5EA)' }}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
+              style={{ background:'linear-gradient(135deg,#FFB5D8,#C5B5EA)' }}
+              whileHover={{ scale:1.05 }} whileTap={{ scale:0.96 }}>
               Jetzt buchen 🐾
             </motion.a>
-          </div>
+          </motion.div>
+
         </div>
 
-        {/* Divider */}
-        <div className="border-t border-gray-700/50 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="font-nunito text-gray-600 text-xs">
-            © 2024 Pfoten Paradies. Alle Rechte vorbehalten.
-          </p>
+        <motion.div variants={row} className="border-t border-gray-800 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
+          <p className="font-nunito text-gray-600 text-xs">© 2024 Pfoten Paradies. Alle Rechte vorbehalten.</p>
           <div className="flex gap-6">
-            {['Impressum', 'Datenschutz', 'AGB'].map((l) => (
-              <a key={l} href="#" className="font-nunito text-gray-600 text-xs hover:text-gray-400 transition-colors">
-                {l}
-              </a>
+            {['Impressum','Datenschutz','AGB'].map(l=>(
+              <a key={l} href="#" className="font-nunito text-gray-600 text-xs hover:text-gray-400 transition-colors">{l}</a>
             ))}
           </div>
-        </div>
-      </div>
+        </motion.div>
+
+      </motion.div>
     </footer>
   )
 }

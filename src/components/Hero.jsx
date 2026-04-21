@@ -1,5 +1,46 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { motion, useMotionValue, useSpring } from 'framer-motion'
+
+function useCountUp(target, duration = 1800, decimals = 0) {
+  const [count, setCount] = useState(0)
+  const ref = useRef(null)
+  const started = useRef(false)
+
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting && !started.current) {
+        started.current = true
+        const start = performance.now()
+        const tick = (now) => {
+          const p = Math.min((now - start) / duration, 1)
+          const ease = 1 - Math.pow(1 - p, 3)
+          setCount(parseFloat((ease * target).toFixed(decimals)))
+          if (p < 1) requestAnimationFrame(tick)
+        }
+        requestAnimationFrame(tick)
+      }
+    }, { threshold: 0.5 })
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [target, duration, decimals])
+
+  return { count, ref }
+}
+
+function StatItem({ target, suffix, label, decimals = 0 }) {
+  const { count, ref } = useCountUp(target, 1600, decimals)
+  return (
+    <div ref={ref}>
+      <p className="font-pacifico text-2xl" style={{
+        background: 'linear-gradient(135deg,#FFB5D8,#C5B5EA)',
+        WebkitBackgroundClip: 'text', backgroundClip: 'text', WebkitTextFillColor: 'transparent'
+      }}>{decimals > 0 ? count.toFixed(decimals) : Math.floor(count)}{suffix}</p>
+      <p className="font-nunito text-xs mt-0.5" style={{ color: '#b0a0c0' }}>{label}</p>
+    </div>
+  )
+}
 
 export default function Hero() {
   const [ready, setReady] = useState(false)
@@ -146,19 +187,9 @@ export default function Hero() {
           {/* Stats */}
           <motion.div {...stagger(0.9)} className="flex gap-8 mt-10 pt-8"
             style={{ borderTop: '1px solid #ede8f5' }}>
-            {[
-              { num: '500+', label: 'Zufriedene Hunde' },
-              { num: '8 J.', label: 'Erfahrung' },
-              { num: '4.9★', label: 'Google Rating' },
-            ].map(({ num, label }) => (
-              <div key={label}>
-                <p className="font-pacifico text-2xl" style={{
-                  background: 'linear-gradient(135deg,#FFB5D8,#C5B5EA)',
-                  WebkitBackgroundClip: 'text', backgroundClip: 'text', WebkitTextFillColor: 'transparent'
-                }}>{num}</p>
-                <p className="font-nunito text-xs mt-0.5" style={{ color: '#b0a0c0' }}>{label}</p>
-              </div>
-            ))}
+            <StatItem target={500} suffix="+" label="Zufriedene Hunde" />
+            <StatItem target={8} suffix=" J." label="Erfahrung" />
+            <StatItem target={4.9} suffix="★" label="Google Rating" decimals={1} />
           </motion.div>
 
         </div>

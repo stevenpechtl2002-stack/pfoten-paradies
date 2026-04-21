@@ -1,8 +1,41 @@
 import { motion, AnimatePresence } from 'framer-motion'
 import { useEffect, useState } from 'react'
 
+// Real paw print SVG path
+function PawPrint({ size = 120, color = '#FFB5D8' }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 100 100">
+      {/* Toe pads — spread wide in an arc */}
+      {[
+        { cx: 18, cy: 52, rx: 10, ry: 12, delay: 0 },
+        { cx: 37, cy: 36, rx: 10, ry: 12, delay: 0.12 },
+        { cx: 63, cy: 36, rx: 10, ry: 12, delay: 0.24 },
+        { cx: 82, cy: 52, rx: 10, ry: 12, delay: 0.36 },
+      ].map((p, i) => (
+        <motion.ellipse
+          key={i} cx={p.cx} cy={p.cy} rx={p.rx} ry={p.ry}
+          fill={color}
+          initial={{ scale: 0, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ delay: p.delay, duration: 0.4, type: 'spring', stiffness: 220 }}
+          style={{ transformOrigin: `${p.cx}px ${p.cy}px` }}
+        />
+      ))}
+      {/* Main pad — large kidney/heart shape */}
+      <motion.path
+        d="M50,88 C36,88 26,79 26,68 C26,57 32,54 38,54 C42,54 46,56 50,59 C54,56 58,54 62,54 C68,54 74,57 74,68 C74,79 64,88 50,88 Z"
+        fill={color}
+        initial={{ scale: 0, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{ delay: 0.52, duration: 0.5, type: 'spring', stiffness: 160 }}
+        style={{ transformOrigin: '50px 71px' }}
+      />
+    </svg>
+  )
+}
+
 export default function LoadingScreen({ onComplete }) {
-  const [phase, setPhase] = useState('draw') // draw -> fade
+  const [phase, setPhase] = useState('draw')
 
   useEffect(() => {
     const t1 = setTimeout(() => setPhase('fade'), 1800)
@@ -21,39 +54,7 @@ export default function LoadingScreen({ onComplete }) {
           className="fixed inset-0 z-[9998] flex flex-col items-center justify-center"
           style={{ background: '#FAFAFA' }}
         >
-          {/* Animated paw SVG */}
-          <motion.svg
-            width="120" height="120" viewBox="0 0 100 100"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.3 }}
-          >
-            {/* Toe beans */}
-            {[
-              { cx: 35, cy: 32, rx: 9, ry: 12, delay: 0 },
-              { cx: 65, cy: 32, rx: 9, ry: 12, delay: 0.15 },
-              { cx: 25, cy: 50, rx: 10, ry: 13, delay: 0.3 },
-              { cx: 75, cy: 50, rx: 10, ry: 13, delay: 0.45 },
-            ].map((p, i) => (
-              <motion.ellipse
-                key={i} cx={p.cx} cy={p.cy} rx={p.rx} ry={p.ry}
-                fill="#FFB5D8"
-                initial={{ scale: 0, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                transition={{ delay: p.delay, duration: 0.4, type: 'spring', stiffness: 200 }}
-                style={{ transformOrigin: `${p.cx}px ${p.cy}px` }}
-              />
-            ))}
-            {/* Main pad */}
-            <motion.ellipse
-              cx="50" cy="72" rx="22" ry="18"
-              fill="#FFB5D8"
-              initial={{ scale: 0, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ delay: 0.6, duration: 0.5, type: 'spring', stiffness: 150 }}
-              style={{ transformOrigin: '50px 72px' }}
-            />
-          </motion.svg>
+          <PawPrint size={120} color="#FFB5D8" />
 
           <motion.h1
             className="font-pacifico text-4xl mt-6"
@@ -62,7 +63,7 @@ export default function LoadingScreen({ onComplete }) {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.9, duration: 0.5 }}
           >
-            Pfoten Paradies
+            Hundesalon Fellraum
           </motion.h1>
           <motion.p
             className="font-nunito text-gray-400 mt-2 text-sm tracking-widest uppercase"

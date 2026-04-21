@@ -59,7 +59,7 @@ export default function About() {
           </div>
 
           <div className="space-y-4 font-nunito text-gray-500 leading-relaxed">
-            <p>Willkommen im <strong className="text-gray-800">Pfoten Paradies</strong> — dem Ort, wo jeder Hund wie ein König behandelt wird. Seit 2015 pflegen wir Vierbeiner aller Rassen mit professionellem Know-how und echter Zuneigung.</p>
+            <p>Willkommen im <strong className="text-gray-800">Hundesalon Fellraum</strong> — dem Ort, wo jeder Hund wie ein König behandelt wird. Seit 2015 pflegen wir Vierbeiner aller Rassen mit professionellem Know-how und echter Zuneigung.</p>
             <p>Unser Team aus zertifizierten Hundepflegern nimmt sich Zeit für jeden Hund. Wir schaffen eine entspannte Atmosphäre, damit der Friseurbesuch kein Stress wird — sondern ein Highlight der Woche.</p>
           </div>
 

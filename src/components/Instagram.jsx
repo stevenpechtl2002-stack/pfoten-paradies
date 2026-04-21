@@ -29,9 +29,9 @@ export default function Instagram() {
           <div>
             <span className="inline-block font-nunito text-xs font-700 tracking-[0.25em] uppercase mb-3 px-4 py-1.5 rounded-full"
               style={{ background: '#FFB5D818', color: '#FFB5D8' }}>Instagram</span>
-            <h2 className="font-pacifico text-3xl md:text-5xl text-gray-900 mt-2">@pfoten.paradies</h2>
+            <h2 className="font-pacifico text-3xl md:text-5xl text-gray-900 mt-2">@hundesalon.fellraum</h2>
           </div>
-          <motion.a href="https://instagram.com/pfoten.paradies" target="_blank" rel="noopener noreferrer"
+          <motion.a href="https://instagram.com/hundesalon.fellraum" target="_blank" rel="noopener noreferrer"
             className="font-nunito font-700 text-sm px-6 py-3 rounded-2xl text-gray-600 self-start whitespace-nowrap flex items-center gap-2"
             style={{ background: '#f8f8f8', border: '1px solid #eee' }}
             whileHover={{ scale: 1.04, background: 'linear-gradient(135deg,#FFB5D8,#C5B5EA)', color: 'white', border: '1px solid transparent' }}>
@@ -44,7 +44,7 @@ export default function Instagram() {
           variants={container} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.1 }}>
           {photos.map((p, i) => (
             <motion.a key={i} variants={item}
-              href="https://instagram.com/pfoten.paradies" target="_blank" rel="noopener noreferrer"
+              href="https://instagram.com/hundesalon.fellraum" target="_blank" rel="noopener noreferrer"
               className="relative overflow-hidden rounded-3xl group aspect-square block"
               whileHover={{ scale: 1.02 }}>
               <img src={p.url} alt="" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />

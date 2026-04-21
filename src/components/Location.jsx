@@ -24,7 +24,7 @@ export default function Location() {
             style={{ height:380, background:'linear-gradient(135deg,#FFB5D815,#C5B5EA15)', boxShadow:'0 8px 40px rgba(0,0,0,0.07)' }}
             initial={{ opacity:0, x:-30 }} whileInView={{ opacity:1, x:0 }} viewport={{ once:true }} transition={{ duration:0.7 }}>
             <iframe
-              title="Pfoten Paradies Standort"
+              title="Hundesalon Fellraum Standort"
               src="https://www.openstreetmap.org/export/embed.html?bbox=13.38,52.52,13.42,52.54&layer=mapnik&marker=52.530,13.400"
               className="w-full h-full border-0"
               style={{ borderRadius:24 }}
@@ -42,7 +42,7 @@ export default function Location() {
                   🐾
                 </div>
                 <div>
-                  <h3 className="font-pacifico text-xl text-gray-900">Pfoten Paradies Berlin</h3>
+                  <h3 className="font-pacifico text-xl text-gray-900">Hundesalon Fellraum Berlin</h3>
                   <p className="font-nunito text-gray-400 text-sm">Berlin-Mitte</p>
                 </div>
               </div>

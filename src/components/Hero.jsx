@@ -121,11 +121,11 @@ export default function Hero() {
             initial={{ opacity: 0, y: 50 }}
             animate={ready ? { opacity: 1, y: 0 } : {}}
             transition={{ delay: 0.2, duration: 0.9, ease: [0.22, 1, 0.36, 1] }}>
-            Pfoten<br />
+            Hundesalon<br />
             <span style={{
               background: 'linear-gradient(135deg, #FFB5D8, #C5B5EA)',
               WebkitBackgroundClip: 'text', backgroundClip: 'text', WebkitTextFillColor: 'transparent',
-            }}>Paradies</span>
+            }}>Fellraum</span>
           </motion.h1>
 
           {/* Subtitle */}

@@ -43,7 +43,7 @@ export default function Footer() {
                 <ellipse cx="35" cy="32" rx="9" ry="12" fill="#FFB5D8"/>
                 <ellipse cx="65" cy="32" rx="9" ry="12" fill="#FFB5D8"/>
               </svg>
-              <h3 className="font-pacifico text-2xl" style={{ color:'#FFB5D8' }}>Pfoten Paradies</h3>
+              <h3 className="font-pacifico text-2xl" style={{ color:'#FFB5D8' }}>Hundesalon Fellraum</h3>
             </div>
             <p className="font-nunito text-gray-500 leading-relaxed mb-6 max-w-xs">
               Berlins Premium Hundesalon — professionelle Pflege mit Liebe und Leidenschaft seit 2015.
@@ -90,7 +90,7 @@ export default function Footer() {
         </div>
 
         <motion.div variants={row} className="border-t border-gray-800 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="font-nunito text-gray-600 text-xs">© 2024 Pfoten Paradies. Alle Rechte vorbehalten.</p>
+          <p className="font-nunito text-gray-600 text-xs">© 2024 Hundesalon Fellraum. Alle Rechte vorbehalten.</p>
           <div className="flex gap-6">
             {['Impressum','Datenschutz','AGB'].map(l=>(
               <a key={l} href="#" className="font-nunito text-gray-600 text-xs hover:text-gray-400 transition-colors">{l}</a>

@@ -66,21 +66,12 @@ export default function Hero() {
   })
 
   return (
-    <section id="home" className="relative min-h-screen flex items-center overflow-hidden"
-      style={{ background: '#ffffff' }}>
+    <section id="home" className="relative min-h-screen flex items-center overflow-hidden">
 
-      {/* Soft background tints matching video's light palette */}
-      <div className="absolute inset-0 pointer-events-none" style={{
-        background: 'radial-gradient(ellipse 70% 80% at 80% 50%, #FFF5F9 0%, #ffffff 55%)'
-      }} />
-      <div className="absolute inset-0 pointer-events-none" style={{
-        background: 'radial-gradient(ellipse 50% 60% at 10% 40%, #F8F4FF 0%, transparent 60%)'
-      }} />
-
-      {/* ── VIDEO: desktop only — fills right half, bleeds to screen edge ── */}
+      {/* ── VIDEO: fills entire background ── */}
       <motion.div
-        className="absolute top-0 right-0 h-full hidden md:block"
-        style={{ width: '58%', x: px, y: py }}
+        className="absolute inset-0 hidden md:block"
+        style={{ x: px, y: py }}
         initial={{ opacity: 0 }}
         animate={ready ? { opacity: 1 } : {}}
         transition={{ delay: 0.2, duration: 1.2 }}>
@@ -95,15 +86,15 @@ export default function Hero() {
           style={{ display: 'block' }}
         />
 
-        {/* Gradient mask: thin fade on left edge only, dog stays fully visible */}
+        {/* Gradient overlay: left side for text readability */}
         <div className="absolute inset-0 pointer-events-none" style={{
-          background: 'linear-gradient(to right, #ffffff 0%, rgba(255,255,255,0.5) 3%, rgba(255,255,255,0.05) 10%, transparent 16%)'
+          background: 'linear-gradient(to right, rgba(255,255,255,0.88) 0%, rgba(255,255,255,0.7) 20%, rgba(255,255,255,0.2) 45%, transparent 65%)'
         }} />
       </motion.div>
 
       {/* ── CONTENT ── */}
       <div className="relative max-w-7xl mx-auto px-2 md:px-4 py-24 w-full">
-        <div className="max-w-md">
+        <div className="max-w-xs">
 
           {/* Tag badge */}
           <motion.div {...stagger(0.1)} className="mb-6">

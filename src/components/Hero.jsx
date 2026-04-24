@@ -103,7 +103,7 @@ export default function Hero() {
 
       {/* ── CONTENT ── */}
       <div className="relative max-w-7xl mx-auto px-8 md:px-16 py-24 w-full">
-        <div className="max-w-xl">
+        <div className="max-w-md">
 
           {/* Tag badge */}
           <motion.div {...stagger(0.1)} className="mb-6">

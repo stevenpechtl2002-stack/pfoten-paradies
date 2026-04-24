@@ -80,7 +80,7 @@ export default function Hero() {
       {/* ── VIDEO: desktop only — fills right portion, bleeds to screen edge ── */}
       <motion.div
         className="absolute top-0 right-0 h-full hidden md:block"
-        style={{ width: '70%', x: px, y: py }}
+        style={{ width: '70%' }}
         initial={{ opacity: 0 }}
         animate={ready ? { opacity: 1 } : {}}
         transition={{ delay: 0.2, duration: 1.2 }}>
@@ -95,9 +95,9 @@ export default function Hero() {
           style={{ display: 'block' }}
         />
 
-        {/* Gradient mask: smooth fade from left */}
+        {/* Gradient mask: left edge only */}
         <div className="absolute inset-0 pointer-events-none" style={{
-          background: 'linear-gradient(to right, #ffffff 0%, rgba(255,255,255,0.85) 8%, rgba(255,255,255,0.3) 25%, transparent 45%)'
+          background: 'linear-gradient(to right, #ffffff 0%, transparent 12%)'
         }} />
       </motion.div>
 

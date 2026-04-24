@@ -77,10 +77,10 @@ export default function Hero() {
         background: 'radial-gradient(ellipse 50% 60% at 10% 40%, #F8F4FF 0%, transparent 60%)'
       }} />
 
-      {/* ── VIDEO: desktop only — fills right half, bleeds to screen edge ── */}
+      {/* ── VIDEO: desktop only — fills right portion, bleeds to screen edge ── */}
       <motion.div
         className="absolute top-0 right-0 h-full hidden md:block"
-        style={{ width: '58%', x: px, y: py }}
+        style={{ width: '70%', x: px, y: py }}
         initial={{ opacity: 0 }}
         animate={ready ? { opacity: 1 } : {}}
         transition={{ delay: 0.2, duration: 1.2 }}>
@@ -95,9 +95,9 @@ export default function Hero() {
           style={{ display: 'block' }}
         />
 
-        {/* Gradient mask: thin fade on left edge only, dog stays fully visible */}
+        {/* Gradient mask: smooth fade from left */}
         <div className="absolute inset-0 pointer-events-none" style={{
-          background: 'linear-gradient(to right, #ffffff 0%, rgba(255,255,255,0.5) 3%, rgba(255,255,255,0.05) 10%, transparent 16%)'
+          background: 'linear-gradient(to right, #ffffff 0%, rgba(255,255,255,0.85) 8%, rgba(255,255,255,0.3) 25%, transparent 45%)'
         }} />
       </motion.div>
 

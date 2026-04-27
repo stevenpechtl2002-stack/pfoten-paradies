@@ -46,7 +46,7 @@ export default function Footer() {
               <h3 className="font-pacifico text-2xl" style={{ color:'#FFB5D8' }}>Hundesalon Fellraum</h3>
             </div>
             <p className="font-nunito text-gray-500 leading-relaxed mb-6 max-w-xs">
-              Berlins Premium Hundesalon — professionelle Pflege mit Liebe und Leidenschaft seit 2015.
+              Kölns Premium Hundesalon — professionelle Pflege mit Liebe und Leidenschaft seit 2015.
             </p>
             <div className="flex gap-3">
               {['IG','FB','TK'].map(s => (

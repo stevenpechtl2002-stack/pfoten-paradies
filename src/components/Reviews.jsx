@@ -6,7 +6,7 @@ const reviews = [
   { stars:5, text:'Max war noch nie so schön! Er war total entspannt. Das Team ist einfach fantastisch — absolute Empfehlung!', author:"Luna's Papa", dog:'Max 🐩', avatar:'👨‍🦱' },
   { stars:5, text:'Super freundliches Team und tolle Atmosphäre! Mia fühlt sich hier immer wohl. Wir kommen jeden Monat!', author:"Mia's Besitzerin", dog:'Mia 🦮', avatar:'👩‍🦳' },
   { stars:5, text:'Rocky sieht nach jedem Besuch traumhaft aus. Schnell, professionell, liebevoll. Immer wieder gerne!', author:"Rocky's Mama", dog:'Rocky 🐕', avatar:'👩' },
-  { stars:5, text:'Beste Hundefriseurin Berlins! Coco liebt es hierher zu kommen. Toller Service, faire Preise!', author:"Coco's Papa", dog:'Coco 🐶', avatar:'👨‍🦳' },
+  { stars:5, text:'Beste Hundefriseurin Kölns! Coco liebt es hierher zu kommen. Toller Service, faire Preise!', author:"Coco's Papa", dog:'Coco 🐶', avatar:'👨‍🦳' },
   { stars:5, text:'Leo war beim ersten Besuch nervös — nach 10 Minuten war er total entspannt. Einfach toll!', author:"Leo's Familie", dog:'Leo 🐾', avatar:'👨‍👩‍👦' },
 ]
 

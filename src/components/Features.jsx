@@ -6,7 +6,7 @@ const items = [
   { icon: '❤️', title: 'Stressfreie Umgebung', desc: 'Ruhige Atmosphäre, kein Zwinger — Ihr Hund fühlt sich bei uns wohl.' },
   { icon: '✂️', title: 'Alle Rassen & Größen', desc: 'Von XS bis XL — wir haben Erfahrung mit jeder Rasse und jedem Fell.' },
   { icon: '📅', title: 'Einfache Buchung', desc: 'Online buchen in 30 Sekunden, Bestätigung per SMS, kein Warten.' },
-  { icon: '📍', title: 'Zentral in Berlin', desc: '3 Minuten vom S-Bahnhof, gut erreichbar, Parkplätze direkt vor der Tür.' },
+  { icon: '📍', title: 'Zentral in Köln', desc: 'Deutz-Mülheimer Str. 183, 51063 Köln — gut erreichbar, Parkplätze direkt vor der Tür.' },
 ]
 
 const container = {
